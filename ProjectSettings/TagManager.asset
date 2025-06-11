@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Wall
   - 
   - 
   - 
@@ -41,6 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 2157574013
+    locked: 0
+  - name: Water
+    uniqueID: 4025674799
+    locked: 0
+  - name: Wall
+    uniqueID: 4142328899
+    locked: 0
   - name: Player
     uniqueID: 363415097
     locked: 0
@@ -49,6 +58,9 @@ TagManager:
     locked: 0
   - name: Bullet
     uniqueID: 3366994031
+    locked: 0
+  - name: Door (Fix)
+    uniqueID: 4294753679
     locked: 0
   m_RenderingLayers:
   - Default
