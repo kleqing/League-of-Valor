@@ -40,7 +40,7 @@ public class Aim : MonoBehaviour
         HandleGunRotation();
         fireTimer -= Time.deltaTime;
         
-        if (fireTimer <= 0f)
+        if (fireTimer <= 0f && isFiring)
         {
             //* Spamming bullets
             Instantiate(bullets, bulletSpawnPoint.position, gun.transform.rotation);
