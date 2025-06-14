@@ -20,7 +20,7 @@ public class BulletBehaviour : MonoBehaviour
 
     private void SetStraightVelocity()
     {
-        float playerDirection = Mathf.Sign(transform.lossyScale.x);
+        float playerDirection = Mathf.Sign(transform.localScale.x);
         rb.linearVelocity = transform.right * bulletSpeed * playerDirection;
     }
 
