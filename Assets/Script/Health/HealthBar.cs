@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -5,12 +6,12 @@ public class HealthBar : MonoBehaviour
 {
     [Range(0f, 1f)]
     [SerializeField] public float originHealth;
-    
-    [Header("Zombie Drop")] 
-    [SerializeField] public GameObject coin;
-    [SerializeField] public GameObject gem;
+
+    [Header("Enemy Drop")] 
+    [SerializeField] private GameObject bullet;
+    [SerializeField] private GameObject health;
     [SerializeField] private float dropChance;
-    [SerializeField] private float gemDropChance;
+    [SerializeField] private float healthDropChance;
     
     private bool isDead;
     private Animator anim;
@@ -54,18 +55,18 @@ public class HealthBar : MonoBehaviour
             }
         }
     }
-    
+
     private void DropItem()
     {
         float random = Random.value;
         
         if (random <= dropChance)
         {
-            Instantiate(coin, transform.position, Quaternion.identity);
+            Instantiate(bullet, transform.position, Quaternion.identity);
         }
-        else if (random <= gemDropChance + dropChance)
+        else if (random <= healthDropChance + dropChance)
         {
-            Instantiate(gem, transform.position, Quaternion.identity);
+            Instantiate(health, transform.position, Quaternion.identity);
         }
     }
     
