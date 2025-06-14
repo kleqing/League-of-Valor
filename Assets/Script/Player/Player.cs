@@ -82,9 +82,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         anim.SetBool("isRun", movement != Vector2.zero && !isDashing);
-        anim.SetBool("isDash", isDashing);
-
-        // Flip nhân vật
+        
         if (isDashing)
         {
             if (dashDirection.x != 0)
