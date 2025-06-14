@@ -1,4 +1,4 @@
-using System;
+using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -12,6 +12,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private GameObject health;
     [SerializeField] private float dropChance;
     [SerializeField] private float healthDropChance;
+    
+    [Header("Death Effect")]
+    [SerializeField] private GameObject deathEffect;
     
     private bool isDead;
     private Animator anim;
@@ -29,7 +32,7 @@ public class HealthBar : MonoBehaviour
         if (currentHealth > 0)
         {
             //* Hurt animation
-            anim.SetTrigger("Hurt"); // Apply for both player and zombie
+            anim.SetTrigger("Hurt"); // Apply for both player and enemy
         }
         else
         {
@@ -38,14 +41,25 @@ public class HealthBar : MonoBehaviour
                 isDead = true;
                 //* Play SFX
                 
-                //* Play animation
-                anim.SetTrigger("Die");
                 
                 //* Die
                 if (GetComponent<Player>() != null)
                 {
                     GetComponent<Player>().enabled = false;
                     GetComponent<Aim>().enabled = false;
+                    
+                    //* Play animation
+                    anim.SetTrigger("Die");
+                }
+
+                else
+                {
+                    if (deathEffect != null)
+                    {
+                        Destroy(gameObject);
+                        Instantiate(deathEffect, transform.position, Quaternion.identity);
+                        DropItem();
+                    }
                 }
             
                 if (GetComponent<Collider2D>() != null)
