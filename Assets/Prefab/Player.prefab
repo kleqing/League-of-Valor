@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8569092575101192618}
   - component: {fileID: 8038459169842044046}
   - component: {fileID: 6190737448708258982}
-  m_Layer: 8
+  m_Layer: 3
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -238,10 +238,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originHealth: 1
-  coin: {fileID: 0}
-  gem: {fileID: 0}
+  bullet: {fileID: 0}
+  health: {fileID: 0}
   dropChance: 0
-  gemDropChance: 0
+  healthDropChance: 0
 --- !u!1 &4766357851331390224
 GameObject:
   m_ObjectHideFlags: 0
