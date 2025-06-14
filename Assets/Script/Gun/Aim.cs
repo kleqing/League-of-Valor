@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,12 +14,15 @@ public class Aim : MonoBehaviour
     private Vector2 worldPosition;
     private Vector2 direction;
     private float angle;
-    private PlayerInput playerInput;
     private bool isFiring;
+
+    private PlayerInput playerInput;
+    private UIManager uiManager;
 
     private void Awake()
     {
         playerInput = new PlayerInput();
+        uiManager = FindAnyObjectByType<UIManager>();
     }
 
     private void OnEnable()
@@ -37,6 +41,10 @@ public class Aim : MonoBehaviour
 
     private void Update()
     {
+        if (uiManager != null && uiManager.IsPaused)
+        {
+            return;
+        }
         HandleGunRotation();
         fireTimer -= Time.deltaTime;
         
@@ -72,6 +80,10 @@ public class Aim : MonoBehaviour
 
     private void OnFireStart(InputAction.CallbackContext context)
     {
+        if (uiManager != null && uiManager.IsPaused)
+        {
+            return;
+        }
         isFiring = true;
     }
 
