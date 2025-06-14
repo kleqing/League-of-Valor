@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Wall
-  - 
+  - Enemy
   - 
   - 
   - 
@@ -61,6 +61,9 @@ TagManager:
     locked: 0
   - name: Door (Fix)
     uniqueID: 4294753679
+    locked: 0
+  - name: Enemy
+    uniqueID: 376827141
     locked: 0
   m_RenderingLayers:
   - Default
