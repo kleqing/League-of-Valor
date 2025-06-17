@@ -17,150 +17,154 @@ public class Player : MonoBehaviour
     [SerializeField] private GameObject dashEffect; // Prefab ghost
     [SerializeField] private float dashEffectCooldown = 0.05f; // Tần suất sinh ghost
     
-    private Animator anim;
-    private Rigidbody2D rb;
-    private Vector2 movement;
-    private PlayerInput playerInput;
+    private Animator _anim;
+    private Rigidbody2D _rb;
+    private Vector2 _movement;
+    private PlayerInput _playerInput;
+    private Collider2D _collider;
     
-    private bool isDashing;
-    private float dashTimer;
-    private float dashCooldownTimer;
-    private bool isDashRecovery;
-    private float dashRecoveryTimer;
-    private Vector2 dashDirection;
-    private Coroutine dashEffectCoroutine;
+    private bool _isDashing;
+    private float _dashTimer;
+    private float _dashCooldownTimer;
+    private bool _isDashRecovery;
+    private float _dashRecoveryTimer;
+    private Vector2 _dashDirection;
+    private Coroutine _dashEffectCoroutine;
 
     private void Awake()
     {
-        rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
-        playerInput = new PlayerInput();
+        _rb = GetComponent<Rigidbody2D>();
+        _anim = GetComponent<Animator>();
+        _playerInput = new PlayerInput();
+        _collider = GetComponent<Collider2D>();
     }
 
     private void OnEnable()
     {
-        playerInput.Enable();
-        playerInput.Player.Move.performed += OnMove;
-        playerInput.Player.Move.canceled += OnMove;
-        playerInput.Player.Dash.performed += OnDash;
+        _playerInput.Enable();
+        _playerInput.Player.Move.performed += OnMove;
+        _playerInput.Player.Move.canceled += OnMove;
+        _playerInput.Player.Dash.performed += OnDash;
     }
 
     private void OnDisable()
     {
-        playerInput.Player.Move.performed -= OnMove;
-        playerInput.Player.Move.canceled += OnMove;
-        playerInput.Player.Dash.performed -= OnDash;
-        playerInput.Disable();
+        _playerInput.Player.Move.performed -= OnMove;
+        _playerInput.Player.Move.canceled += OnMove;
+        _playerInput.Player.Dash.performed -= OnDash;
+        _playerInput.Disable();
     }
 
     private void OnMove(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && !isDashRecovery)
+        if (context.performed && !_isDashing && !_isDashRecovery)
         {
-            movement = context.ReadValue<Vector2>();
+            _movement = context.ReadValue<Vector2>();
         }
         else if (context.canceled)
         {
-            movement = Vector2.zero;
+            _movement = Vector2.zero;
         }
     }
 
     private void OnDash(InputAction.CallbackContext context)
     {
-        if (context.performed && !isDashing && dashCooldownTimer <= 0f && movement != Vector2.zero)
+        if (context.performed && !_isDashing && _dashCooldownTimer <= 0f && _movement != Vector2.zero)
         {
-            isDashing = true;
-            dashTimer = dashDuration;
-            dashDirection = movement.normalized;
-            dashCooldownTimer = dashCooldown;
+            _isDashing = true;
+            _dashTimer = dashDuration;
+            _dashDirection = _movement.normalized;
+            _dashCooldownTimer = dashCooldown;
             
-            playerInput.Player.Move.Disable(); //* Disable movement input during dash
+            _playerInput.Player.Move.Disable(); //* Disable movement input during dash
+            _collider.enabled = false;
             StartDashEffect();
         }
     }
 
     private void Update()
     {
-        anim.SetBool("isRun", movement != Vector2.zero && !isDashing);
+        _anim.SetBool("isRun", _movement != Vector2.zero && !_isDashing);
         
-        if (isDashing)
+        if (_isDashing)
         {
-            if (dashDirection.x != 0)
+            if (_dashDirection.x != 0)
             {
-                transform.localScale = new Vector3(Mathf.Sign(dashDirection.x), 1, 1);
+                transform.localScale = new Vector3(Mathf.Sign(_dashDirection.x), 1, 1);
             }
         }
-        else if (movement.x != 0)
+        else if (_movement.x != 0)
         {
-            transform.localScale = new Vector3(Mathf.Sign(movement.x), 1, 1);
+            transform.localScale = new Vector3(Mathf.Sign(_movement.x), 1, 1);
         }
 
-        if (isDashing)
+        if (_isDashing)
         {
-            dashTimer -= Time.deltaTime;
-            if (dashTimer <= 0f)
+            _dashTimer -= Time.deltaTime;
+            if (_dashTimer <= 0f)
             {
-                isDashing = false;
+                _isDashing = false;
                 StopDashEffect();
                 
-                isDashRecovery = true;
-                dashRecoveryTimer = dashRecoveryDuration;
+                _isDashRecovery = true;
+                _dashRecoveryTimer = dashRecoveryDuration;
             }
         }
 
-        if (isDashRecovery)
+        if (_isDashRecovery)
         {
-            dashRecoveryTimer -= Time.deltaTime;
-            if (dashRecoveryTimer <= 0f)
+            _dashRecoveryTimer -= Time.deltaTime;
+            if (_dashRecoveryTimer <= 0f)
             {
-                isDashRecovery = false;
-                playerInput.Player.Move.Enable(); //* Re-enable movement input after dash recovery
+                _isDashRecovery = false;
+                _playerInput.Player.Move.Enable(); //* Re-enable movement input after dash recovery
+                _collider.enabled = true; //* Re-enable collider after dash recovery
             }
         }
         
-        if (dashCooldownTimer > 0f)
+        if (_dashCooldownTimer > 0f)
         {
-            dashCooldownTimer -= Time.deltaTime;
+            _dashCooldownTimer -= Time.deltaTime;
         }
     }
 
     private void FixedUpdate()
     {
-        if (isDashing)
+        if (_isDashing)
         {
-            rb.linearVelocity = dashDirection * dashSpeed;
+            _rb.linearVelocity = _dashDirection * dashSpeed;
         }
-        else if (isDashRecovery)
+        else if (_isDashRecovery)
         {
-            rb.linearVelocity = Vector2.zero;
+            _rb.linearVelocity = Vector2.zero;
         }
         else
         {
-            rb.linearVelocity = movement.normalized * speed;
+            _rb.linearVelocity = _movement.normalized * speed;
         }
     }
 
     private void StartDashEffect()
     {
-        if (dashEffectCoroutine != null)
+        if (_dashEffectCoroutine != null)
         {
-            StopCoroutine(dashEffectCoroutine);
+            StopCoroutine(_dashEffectCoroutine);
         }
-        dashEffectCoroutine = StartCoroutine(DashEffectCoroutine());
+        _dashEffectCoroutine = StartCoroutine(DashEffectCoroutine());
     }
 
     private void StopDashEffect()
     {
-        if (dashEffectCoroutine != null)
+        if (_dashEffectCoroutine != null)
         {
-            StopCoroutine(dashEffectCoroutine);
-            dashEffectCoroutine = null;
+            StopCoroutine(_dashEffectCoroutine);
+            _dashEffectCoroutine = null;
         }
     }
 
     private IEnumerator DashEffectCoroutine()
     {
-        while (isDashing)
+        while (_isDashing)
         {
             GameObject effect = Instantiate(dashEffect, transform.position, transform.rotation);
             SpriteRenderer effectSpriteRenderer = effect.GetComponent<SpriteRenderer>();
