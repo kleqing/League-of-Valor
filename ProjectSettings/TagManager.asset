@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 3
-  tags: []
+  tags:
+  - Car
   layers:
   - Default
   - TransparentFX
@@ -59,14 +60,23 @@ TagManager:
   - name: Bullet
     uniqueID: 3366994031
     locked: 0
+  - name: Truck
+    uniqueID: 161812459
+    locked: 0
   - name: Door (Fix)
     uniqueID: 4294753679
     locked: 0
   - name: Enemy
     uniqueID: 376827141
     locked: 0
+  - name: Enemy Gun
+    uniqueID: 105924343
+    locked: 0
   - name: Explosion
     uniqueID: 3085384845
+    locked: 0
+  - name: Bomb
+    uniqueID: 1563162209
     locked: 0
   m_RenderingLayers:
   - Default
