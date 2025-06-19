@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,29 +15,32 @@ public class HealthBar : MonoBehaviour
     [Header("Death Effect")]
     [SerializeField] private GameObject deathEffect;
     
-    private bool isDead;
-    private Animator anim;
-    public float currentHealth { get; private set; }
+    private UIManager _uiManager;
+    
+    private bool _isDead;
+    private Animator _anim;
+    public float CurrentHealth { get; private set; }
 
     private void Awake()
     {
-        currentHealth = originHealth;
-        anim = GetComponent<Animator>();
+        CurrentHealth = originHealth;
+        _anim = GetComponent<Animator>();
+        _uiManager = FindFirstObjectByType<UIManager>();
     }
 
     public void TakeDamage(float damage)
     {
-        currentHealth = Mathf.Clamp(currentHealth - damage, 0, originHealth);
-        if (currentHealth > 0)
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, originHealth);
+        if (CurrentHealth > 0)
         {
             //* Hurt animation
-            anim.SetTrigger("Hurt"); // Apply for both player and enemy
+            _anim.SetTrigger("Hurt"); // Apply for both player and enemy
         }
         else
         {
-            if (!isDead)
+            if (!_isDead)
             {
-                isDead = true;
+                _isDead = true;
                 //* Play SFX
                 
                 
@@ -49,7 +51,9 @@ public class HealthBar : MonoBehaviour
                     GetComponent<Aim>().enabled = false;
                     
                     //* Play animation
-                    anim.SetTrigger("Die");
+                    _anim.SetTrigger("Die");
+                    
+                    _uiManager.GameOver();
                 }
 
                 else
@@ -86,8 +90,8 @@ public class HealthBar : MonoBehaviour
     
     public void Revive()
     {
-        currentHealth = originHealth;
-        isDead = false;
+        CurrentHealth = originHealth;
+        _isDead = false;
         GetComponent<Player>().enabled = true;
         GetComponent<Aim>().enabled = true;
 
@@ -96,6 +100,6 @@ public class HealthBar : MonoBehaviour
             GetComponent<Collider2D>().enabled = true;
         }
         
-        anim.SetTrigger("Idle");
+        _anim.SetTrigger("Idle");
     }
 }
