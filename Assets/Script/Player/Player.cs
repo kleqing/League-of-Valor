@@ -14,8 +14,8 @@ public class Player : MonoBehaviour
     [SerializeField] private float dashRecoveryDuration;
     
     [Header("Dash Effect")]
-    [SerializeField] private GameObject dashEffect; // Prefab ghost
-    [SerializeField] private float dashEffectCooldown = 0.05f; // Tần suất sinh ghost
+    [SerializeField] private GameObject dashEffect;
+    [SerializeField] private float dashEffectCooldown = 0.05f;
     
     private Animator _anim;
     private Rigidbody2D _rb;
@@ -178,4 +178,5 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(dashEffectCooldown);
         }
     }
+
 }
