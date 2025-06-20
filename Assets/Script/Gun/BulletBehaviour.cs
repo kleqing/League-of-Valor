@@ -9,6 +9,9 @@ public class BulletBehaviour : MonoBehaviour
     [SerializeField] private LayerMask layerMask;
     [SerializeField] private float damage;
     
+    [Header("SFX")]
+    [SerializeField] private AudioClip bulletSFX;
+    
     private Rigidbody2D rb;
 
     private void Awake()
@@ -35,6 +38,7 @@ public class BulletBehaviour : MonoBehaviour
         if ((layerMask.value & (1 << other.gameObject.layer)) > 0)
         {
             //* Play SFX
+            SFX.Instance.PlaySound(bulletSFX);
             
             //* Damage the other object
             HealthBar health = other.GetComponent<HealthBar>();
