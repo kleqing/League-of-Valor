@@ -1,11 +1,16 @@
 using System;
+using JetBrains.Annotations;
 using UnityEngine;
 
 public class Patrol : MonoBehaviour
 {
     [Header("Patrol Settings")] 
-    [SerializeField] private Transform pointA;
-    [SerializeField] private Transform pointB;
+    [SerializeField]
+    [CanBeNull]
+    private Transform pointA;
+    [SerializeField] 
+    [CanBeNull] 
+    private Transform pointB;
 
     [Header("Enemy Settings")]
     [SerializeField] private Transform enemy;
@@ -30,6 +35,10 @@ public class Patrol : MonoBehaviour
 
     private void Update()
     {
+        if (pointA == null || pointB == null || enemy == null)
+        {
+            return;
+        }
         if (isMoveLeft)
         {
             if (enemy.position.x >= pointA.position.x)
