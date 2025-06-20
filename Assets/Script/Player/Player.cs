@@ -30,6 +30,8 @@ public class Player : MonoBehaviour
     private float _dashRecoveryTimer;
     private Vector2 _dashDirection;
     private Coroutine _dashEffectCoroutine;
+    
+    private static readonly string IsRun = "isRun";
 
     private void Awake()
     {
@@ -84,7 +86,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        _anim.SetBool("isRun", _movement != Vector2.zero && !_isDashing);
+        _anim.SetBool(IsRun, _movement != Vector2.zero && !_isDashing);
         
         if (_isDashing)
         {
