@@ -15,6 +15,10 @@ public class HealthBar : MonoBehaviour
     [Header("Death Effect")]
     [SerializeField] private GameObject deathEffect;
     
+    [Header("Armor")]
+    [Range(0f, 100f)]
+    [SerializeField] private float armor;
+    
     private UIManager _uiManager;
     
     private bool _isDead;
@@ -30,7 +34,10 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, originHealth);
+        float damageMultiplier = 100f / (armor + 100f);
+        float effectiveDamage = damage * damageMultiplier;
+        CurrentHealth = Mathf.Clamp(CurrentHealth - effectiveDamage, 0, originHealth);
+        Debug.Log(CurrentHealth);
         if (CurrentHealth > 0)
         {
             //* Hurt animation
@@ -64,6 +71,7 @@ public class HealthBar : MonoBehaviour
                         Instantiate(deathEffect, transform.position, Quaternion.identity);
                         DropItem();
                     }
+                    
                 }
             
                 if (GetComponent<Collider2D>() != null)
