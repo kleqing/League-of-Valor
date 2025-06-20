@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 2951730577562168043}
   - component: {fileID: 7048846703896349135}
   - component: {fileID: 593683602557703369}
+  - component: {fileID: 7624994032472288147}
   - component: {fileID: 4219831959693479648}
-  m_Layer: 0
+  - component: {fileID: 1823710296612065750}
+  m_Layer: 9
   m_Name: Truck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -135,6 +137,28 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1.01, y: 0.5}
   m_EdgeRadius: 0
+--- !u!95 &7624994032472288147
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530207387980423129}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5a4ed9424f14df64db70f12ce9ac9743, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &4219831959693479648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -209,3 +233,22 @@ MonoBehaviour:
   - {fileID: 0}
   moveSpeed: 2
   stopDistance: 0.2
+--- !u!114 &1823710296612065750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6530207387980423129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6d81e579e4e7b94e928516b9e9fa55d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  originHealth: 1
+  bullet: {fileID: 0}
+  health: {fileID: 0}
+  dropChance: 0
+  healthDropChance: 0
+  deathEffect: {fileID: 6192724089161036641, guid: dfe04f9633c8ef141b8cad34cc3df573, type: 3}
+  armor: 90
