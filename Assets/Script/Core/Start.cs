@@ -11,7 +11,6 @@ public class Start : MonoBehaviour
     [SerializeField] private GameObject firstWave;
     [SerializeField] private GameObject startBigWave;
     
-
     private void Awake()
     {
         firstWave.SetActive(true);

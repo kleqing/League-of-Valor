@@ -54641,11 +54641,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3746879121871878636, guid: 4c8a7c1678e1f9843a4b7d235c499fc5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.57
+      value: 11.89
       objectReference: {fileID: 0}
     - target: {fileID: 3746879121871878636, guid: 4c8a7c1678e1f9843a4b7d235c499fc5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -23.51
+      value: -23.25
       objectReference: {fileID: 0}
     - target: {fileID: 3746879121871878636, guid: 4c8a7c1678e1f9843a4b7d235c499fc5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -54717,9 +54717,13 @@ PrefabInstance:
       propertyPath: truckMovement
       value: 
       objectReference: {fileID: 1197410576}
+    - target: {fileID: 2082225316275393006, guid: f94159c1bbf8c0e4190ed92fb7452f5d, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4266422912331326100, guid: f94159c1bbf8c0e4190ed92fb7452f5d, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5425334017012441435, guid: f94159c1bbf8c0e4190ed92fb7452f5d, type: 3}
       propertyPath: m_LocalPosition.x

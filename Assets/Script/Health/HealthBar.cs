@@ -6,18 +6,18 @@ public class HealthBar : MonoBehaviour
     [Range(0f, 1f)]
     [SerializeField] public float originHealth;
 
-    [Header("Enemy Drop")] 
-    [SerializeField] private GameObject bullet;
-    [SerializeField] private GameObject health;
-    [SerializeField] private float dropChance;
-    [SerializeField] private float healthDropChance;
+    // [Header("Enemy Drop")] 
+    // [SerializeField] private GameObject bullet;
+    // [SerializeField] private GameObject health;
+    // [SerializeField] private float dropChance;
+    // [SerializeField] private float healthDropChance;
     
     [Header("Death Effect")]
     [SerializeField] private GameObject deathEffect;
     
-    [Header("Armor")]
-    [Range(0f, 100f)]
-    [SerializeField] private float armor;
+    // [Header("Armor")]
+    // [Range(0f, 100f)]
+    // [SerializeField] private float armor;
     
     private UIManager _uiManager;
     
@@ -34,10 +34,9 @@ public class HealthBar : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        float damageMultiplier = 100f / (armor + 100f);
-        float effectiveDamage = damage * damageMultiplier;
-        CurrentHealth = Mathf.Clamp(CurrentHealth - effectiveDamage, 0, originHealth);
-        Debug.Log(CurrentHealth);
+        // float damageMultiplier = 100f / (armor + 100f);
+        // float effectiveDamage = damage * damageMultiplier;
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, originHealth);
         if (CurrentHealth > 0)
         {
             //* Hurt animation
@@ -67,11 +66,10 @@ public class HealthBar : MonoBehaviour
                 {
                     if (deathEffect != null)
                     {
-                        Destroy(gameObject);
                         Instantiate(deathEffect, transform.position, Quaternion.identity);
-                        DropItem();
                     }
-                    
+                    //DropItem();
+                    Destroy(gameObject);
                 }
             
                 if (GetComponent<Collider2D>() != null)
@@ -82,19 +80,19 @@ public class HealthBar : MonoBehaviour
         }
     }
 
-    private void DropItem()
-    {
-        float random = Random.value;
-        
-        if (random <= dropChance)
-        {
-            Instantiate(bullet, transform.position, Quaternion.identity);
-        }
-        else if (random <= healthDropChance + dropChance)
-        {
-            Instantiate(health, transform.position, Quaternion.identity);
-        }
-    }
+    // private void DropItem()
+    // {
+    //     float random = Random.value;
+    //     
+    //     if (random <= dropChance)
+    //     {
+    //         Instantiate(bullet, transform.position, Quaternion.identity);
+    //     }
+    //     else if (random <= healthDropChance + dropChance)
+    //     {
+    //         Instantiate(health, transform.position, Quaternion.identity);
+    //     }
+    // }
     
     public void Revive()
     {

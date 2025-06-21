@@ -194,7 +194,7 @@ MonoBehaviour:
   firePoint: {fileID: 2237882434254491273}
   fireRate: 1
   detector: {fileID: 2171820827816904998}
-  player: {fileID: 0}
+  player: {fileID: 504931425516417107, guid: 88cb763769fc0314fa5177b9619f4e50, type: 3}
 --- !u!114 &2171820827816904998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,12 +247,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originHealth: 1
-  bullet: {fileID: 0}
-  health: {fileID: 0}
-  dropChance: 0
-  healthDropChance: 0
   deathEffect: {fileID: 0}
-  armor: 0
 --- !u!1 &5353802693154459990
 GameObject:
   m_ObjectHideFlags: 0
