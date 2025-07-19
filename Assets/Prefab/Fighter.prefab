@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 4383466947952251180}
   - component: {fileID: 2410577539548645387}
   - component: {fileID: 651547449417164680}
-  - component: {fileID: 368090678912810365}
   - component: {fileID: 7996304813048545452}
   - component: {fileID: 2415618841891655889}
+  - component: {fileID: 763007489207770201}
   m_Layer: 8
   m_Name: Fighter
   m_TagString: Untagged
@@ -256,22 +256,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &368090678912810365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2405211441259185581}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 59c17914e3c140f478c381e3c28f2d88, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  bullets: {fileID: 4853291420135534097, guid: 68f1d9e32d1ec7742b1605f0f95f221e, type: 3}
-  bulletSpawnPoint: {fileID: 1090155592390798417}
-  fireRate: 0.3
-  rotationOffset: -90
 --- !u!114 &7996304813048545452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -292,7 +276,7 @@ MonoBehaviour:
   visibilityLayer:
     serializedVersion: 2
     m_Bits: 0
-  target: {fileID: 0}
+  target: {fileID: 504931425516417107, guid: 88cb763769fc0314fa5177b9619f4e50, type: 3}
   <TargetVisible>k__BackingField: 0
 --- !u!114 &2415618841891655889
 MonoBehaviour:
@@ -312,7 +296,22 @@ MonoBehaviour:
   dropChance: 0
   healthDropChance: 0
   deathEffect: {fileID: 6192724089161036641, guid: dfe04f9633c8ef141b8cad34cc3df573, type: 3}
-  armor: 0
+--- !u!114 &763007489207770201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2405211441259185581}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 59c17914e3c140f478c381e3c28f2d88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bullets: {fileID: 4853291420135534097, guid: 68f1d9e32d1ec7742b1605f0f95f221e, type: 3}
+  bulletSpawnPoint: {fileID: 1090155592390798417}
+  fireRate: 2
+  rotationOffset: -90
 --- !u!1 &7909836689520122811
 GameObject:
   m_ObjectHideFlags: 0

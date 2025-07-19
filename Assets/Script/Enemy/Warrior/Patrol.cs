@@ -1,4 +1,3 @@
-using System;
 using JetBrains.Annotations;
 using UnityEngine;
 
@@ -25,12 +24,12 @@ public class Patrol : MonoBehaviour
     private bool isMoveLeft;
     private float idleTimer;
     
-    private Animator animator;
+    //private Animator animator;
 
     private void Awake()
     {
         initialScale = enemy.localScale;
-        animator = enemy.GetComponent<Animator>();
+        //animator = enemy.GetComponent<Animator>();
     }
 
     private void Update()
@@ -65,7 +64,7 @@ public class Patrol : MonoBehaviour
 
     private void ChangeDirection()
     {
-        animator.SetBool("Run", false);
+        //animator.SetBool("Run", false);
         idleTimer += Time.deltaTime;
         
         if (idleTimer >= idleDuration)
@@ -77,15 +76,11 @@ public class Patrol : MonoBehaviour
     private void MoveInDirection(float direction)
     {
         idleTimer = 0;
-        animator.SetBool("Run", true);
+        //animator.SetBool("Run", true);
         enemy.localScale = new Vector3(Mathf.Abs(initialScale.x) * direction, initialScale.y, initialScale.z);
         
         //* Move enemy between point A and point B
         enemy.position = new Vector3(enemy.position.x + Time.deltaTime * direction * speed, enemy.position.y, enemy.position.z);
     }
 
-    private void OnDisable()
-    {
-        animator.SetBool("Run", false);
-    }
 }

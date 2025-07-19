@@ -11,6 +11,7 @@ public class Movement : MonoBehaviour
     
     private int currentWaypointIndex = 0;
     private SpriteRenderer spriteRenderer;
+    private bool isMovementAllowed = false;
 
     private void Awake()
     {
@@ -19,11 +20,13 @@ public class Movement : MonoBehaviour
         {
             Debug.LogError("No waypoints assigned to the truck movement script.");
         }
+
+        enabled = false;
     }
 
     private void Update()
     {
-        if (currentWaypointIndex < waypoints.Count)
+        if (currentWaypointIndex < waypoints.Count && isMovementAllowed)
         {
             Transform targetWaypoint = waypoints[currentWaypointIndex];
             transform.position = Vector3.MoveTowards(transform.position, targetWaypoint.position, moveSpeed * Time.deltaTime);
@@ -36,8 +39,7 @@ public class Movement : MonoBehaviour
                 currentWaypointIndex++;
             }
         }
-
-        else
+        else if (currentWaypointIndex >= waypoints.Count)
         {
             enabled = false;
         }
@@ -48,5 +50,11 @@ public class Movement : MonoBehaviour
         waypoints = newWaypoints;
         currentWaypointIndex = 0;
         enabled = true;
+        isMovementAllowed = true;
+    }
+    
+    public void StopMovement()
+    {
+        isMovementAllowed = false;
     }
 }
