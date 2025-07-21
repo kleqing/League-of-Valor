@@ -1,4 +1,4 @@
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
@@ -67,6 +67,12 @@ public class UIManager : MonoBehaviour
         _menu.Disable();
         _menu.performed -= Pause;
         _playerInput.Player.Disable();
+    }
+
+    public void OnConfirmPaymentClicked()
+    {
+        var payment = FindAnyObjectByType<PaymentManagement>();
+        StartCoroutine(payment.CheckPaymentStatus("kleqing"));
     }
 
     public void Pause(InputAction.CallbackContext context)
@@ -151,13 +157,26 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-            gameOverMenu.SetActive(true);
+            var payment = FindAnyObjectByType<PaymentManagement>();
+            if (payment != null)
+            {
+                Debug.Log("Trigger PayOS...");
+                payment.BuyRevive();
+            }
+            else
+            {
+                Debug.LogWarning("PaymentManagement not found");
+            }
         }
     }
     
     public void UpdateReviveText()
     {
-        if (remainingReviveText != null)
+        if (_currentRevives == 0)
+        {
+            remainingReviveText.text = "Want more? Buy a revive!";
+        }
+        else
         {
             remainingReviveText.text = $"{_currentRevives} remaining";
         }
@@ -166,5 +185,18 @@ public class UIManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(1);
+    }
+
+    private void CloseGameOverUI()
+    {
+        if (gameOverMenu != null)
+        {
+            gameOverMenu.SetActive(false);
+        }
+
+        Time.timeScale = 1f;
+        _playerInput.Player.Enable();
+        _playerInput.Menu.Disable();
+        _playerInput.Menu.UI.Enable();
     }
 }

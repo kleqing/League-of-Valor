@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 8569092575101192618}
   - component: {fileID: 8038459169842044046}
   - component: {fileID: 6190737448708258982}
+  - component: {fileID: 5481154283309633140}
   m_Layer: 3
   m_Name: Player
   m_TagString: Player
@@ -238,12 +239,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   originHealth: 1
-  bullet: {fileID: 0}
-  health: {fileID: 0}
-  dropChance: 0
-  healthDropChance: 0
   deathEffect: {fileID: 0}
-  armor: 75
+--- !u!114 &5481154283309633140
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3533577658733175403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d07b3985761e4c44daa6ea27f332c2b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerName: kleqing
 --- !u!1 &4766357851331390224
 GameObject:
   m_ObjectHideFlags: 0
