@@ -194,7 +194,6 @@ public class UIManager : MonoBehaviour
     
     public void UpdateReviveText()
     {
-        mainMenu.SetActive(false);
         if (_currentRevives == 0)
         {
             remainingReviveText.text = "Want more? Buy a revive!";
