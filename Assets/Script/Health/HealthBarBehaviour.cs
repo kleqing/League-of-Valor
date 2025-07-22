@@ -1,20 +1,30 @@
-using System;
+﻿using System;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HealthBarBehaviour : MonoBehaviour
 {
-    [SerializeField] private HealthBar playerHealth;
+    private HealthBar playerHealth;
     [SerializeField] private Slider currentHealth;
 
     private void Start()
     {
+        playerHealth = GameObject.FindGameObjectWithTag("Player").GetComponent<HealthBar>();
+
+        if (playerHealth == null)
+        {
+            return;
+        }
+
         currentHealth.maxValue = playerHealth.CurrentHealth;
         currentHealth.value = playerHealth.CurrentHealth;
     }
 
     private void Update()
     {
-        currentHealth.value = playerHealth.CurrentHealth;
+        if (playerHealth != null)
+        {
+            currentHealth.value = playerHealth.CurrentHealth;
+        }
     }
 }
