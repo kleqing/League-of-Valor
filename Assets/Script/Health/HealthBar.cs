@@ -53,9 +53,12 @@ public class HealthBar : MonoBehaviour
                 //* Die
                 if (GetComponent<Player>() != null)
                 {
-                    GetComponent<Player>().enabled = false;
-                    GetComponent<Aim>().enabled = false;
-                    
+                    var playerScript = GetComponent<Player>();
+                    if (playerScript != null) playerScript.enabled = false;
+
+                    var aimScript = GetComponent<Aim>();
+                    if (aimScript != null) aimScript.enabled = false;
+
                     //* Play animation
                     _anim.SetTrigger("Die");
                     
